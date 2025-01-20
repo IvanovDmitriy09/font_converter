@@ -16,7 +16,6 @@ type
     SaveDialog1: TSaveDialog;
     FontDialog1: TFontDialog;
     XPManifest1: TXPManifest;
-    Label2: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure ScrollBox1MouseWheel(Sender: TObject; Shift: TShiftState;
       WheelDelta: Integer; MousePos: TPoint; var Handled: Boolean);
@@ -39,8 +38,10 @@ var i, w: integer;
 begin
 if fontdialog1.Execute then
 begin
+image1.Picture.Bitmap.PixelFormat:= pf1bit;
 image1.Picture.Bitmap.Canvas.fillrect(image1.Picture.Bitmap.canvas.cliprect);
 image1.Picture.Bitmap.Canvas.Font:=fontdialog1.Font;
+image1.Height:=-fontdialog1.Font.Height*(64);
 image1.Picture.Bitmap.Height:=-fontdialog1.Font.Height*(64);
 w:=0;
 for i:=0 to 63 do
@@ -50,7 +51,6 @@ end;
 image1.Picture.Bitmap.Width:=w;
 
 label1.Caption:='Ширина: '+inttostr(w)+' пикс.'+char(13)+'Высота: '+inttostr(-fontdialog1.Font.Height)+' пикс.';
-label2.Caption:=inttostr(image1.Canvas.TextWidth(char(196)));
 
 for i:=0 to 63 do
 begin
@@ -59,7 +59,6 @@ end;
 
 end;
 scrollbox1.SetFocus;
-
 end;
 
 procedure TForm1.ScrollBox1MouseWheel(Sender: TObject; Shift: TShiftState;
@@ -72,6 +71,7 @@ procedure TForm1.Button2Click(Sender: TObject);
 begin
 if savedialog1.Execute then
 image1.Picture.SaveToFile(savedialog1.FileName+'_.bmp');
+scrollbox1.SetFocus;
 end;
 
 end.

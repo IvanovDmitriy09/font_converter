@@ -41,20 +41,27 @@ begin
 image1.Picture.Bitmap.PixelFormat:= pf1bit;
 image1.Picture.Bitmap.Canvas.fillrect(image1.Picture.Bitmap.canvas.cliprect);
 image1.Picture.Bitmap.Canvas.Font:=fontdialog1.Font;
-image1.Height:=-fontdialog1.Font.Height*(64);
-image1.Picture.Bitmap.Height:=-fontdialog1.Font.Height*(64);
+image1.Height:=-fontdialog1.Font.Height*(160);
+image1.Picture.Bitmap.Height:=-fontdialog1.Font.Height*(160);
 w:=0;
-for i:=0 to 63 do
+
+for i:=0 to 95 do
 begin
-w:=max(w, image1.Canvas.TextWidth(char(192+i)));
+w:=max(w, image1.Canvas.TextWidth(char(32+i)));
 end;
+
 image1.Picture.Bitmap.Width:=w;
 
 label1.Caption:='Ширина: '+inttostr(w)+' пикс.'+char(13)+'Высота: '+inttostr(-fontdialog1.Font.Height)+' пикс.';
 
-for i:=0 to 63 do
+for i:=0 to 95 do
 begin
-image1.Picture.Bitmap.Canvas.TextOut(0, -(fontdialog1.Font.Height*i), char(192+i));
+image1.Picture.Bitmap.Canvas.TextOut(0, -(fontdialog1.Font.Height*i), char(32+i));
+end;
+
+for i:=96 to 159 do
+begin
+image1.Picture.Bitmap.Canvas.TextOut(0, -(fontdialog1.Font.Height*i), char(96+i));
 end;
 
 end;
